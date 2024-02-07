@@ -65,7 +65,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testCreateDeleteAndFind() {
+    void testCreateAndDelete() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
@@ -82,10 +82,10 @@ class ProductRepositoryTest {
         productRepository.delete(product.getProductId());
         productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
+
     }
 
-    @Test
-    void testCreateEditAndFind() {
+    void testCreateAndDeleteNotExistingProduct() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
@@ -95,21 +95,48 @@ class ProductRepositoryTest {
         Iterator<Product> productIterator = productRepository.findAll();
         assertTrue(productIterator.hasNext());
         Product savedProduct = productIterator.next();
-        String productName = savedProduct.getProductName();
-        int productQuantity = savedProduct.getProductQuantity();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+        
+        Product NotExistingProduct = new Product();
+        NotExistingProduct.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        NotExistingProduct.setProductName("Sampo Cap Usep");
+        NotExistingProduct.setProductQuantity(50);
+        productRepository.delete(NotExistingProduct.getProductId());
+        productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+    }
+
+    @Test
+    void testCreateAndEdit() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
         assertEquals(product.getProductId(), savedProduct.getProductId());
         assertEquals(product.getProductName(), savedProduct.getProductName());
         assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
 
-        product.setProductName("Kecap Cap Bagas");
-        product.setProductQuantity(50);
-        assertNotEquals(product.getProductName(),productName);
-        assertNotEquals(product.getProductQuantity(),productQuantity);
+        String productName = savedProduct.getProductName();
+        int productQuantity = savedProduct.getProductQuantity();
 
-        productIterator = productRepository.findAll();
-        Product updatedProduct = productIterator.next();
-        assertEquals(product.getProductId(),updatedProduct.getProductId());
-        assertEquals(product.getProductName(),updatedProduct.getProductName());
-        assertEquals(product.getProductQuantity(),updatedProduct.getProductQuantity());
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId(product.getProductId());
+        updatedProduct.setProductName("Kecap Cap Bagas");
+        updatedProduct.setProductQuantity(120);
+        Product editedProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productRepository.update(editedProduct, "Kecap Cap Bagas", 120);
+
+        assertNotEquals(editedProduct.getProductName(),productName);
+        assertNotEquals(editedProduct.getProductQuantity(),productQuantity);
+        assertEquals(editedProduct.getProductId(),updatedProduct.getProductId());
+        assertEquals(editedProduct.getProductName(),updatedProduct.getProductName());
+        assertEquals(editedProduct.getProductQuantity(),updatedProduct.getProductQuantity());
     }
 }
