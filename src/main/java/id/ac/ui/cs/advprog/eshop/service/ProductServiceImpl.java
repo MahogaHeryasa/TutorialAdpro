@@ -37,4 +37,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(productId);
     }
 
+    public void update(Product product, String productName, int productQuantity) {
+        productRepository.update(product, productName, productQuantity);
+    }
 }

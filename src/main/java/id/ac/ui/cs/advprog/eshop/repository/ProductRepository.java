@@ -33,4 +33,9 @@ public class ProductRepository {
         return null;
     }
 
+    public void update(Product product, String productName, int productQuantity) {
+        product.setProductName(productName);
+        product.setProductQuantity(productQuantity);
+    }
+
 }

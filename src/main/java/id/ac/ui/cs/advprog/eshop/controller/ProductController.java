@@ -53,8 +53,7 @@ public class ProductController {
                               @RequestParam String productName,
                               @RequestParam int productQuantity) {
         Product product = service.findById(productId);
-        product.setProductName(productName);
-        product.setProductQuantity(productQuantity);
+        service.update(product, productName, productQuantity);
 
         return "redirect:/product/list";
     }
