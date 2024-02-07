@@ -63,4 +63,53 @@ class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testCreateDeleteAndFind() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+
+        productRepository.delete(product.getProductId());
+        productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testCreateEditAndFind() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        String productName = savedProduct.getProductName();
+        int productQuantity = savedProduct.getProductQuantity();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+
+        product.setProductName("Kecap Cap Bagas");
+        product.setProductQuantity(50);
+        assertNotEquals(product.getProductName(),productName);
+        assertNotEquals(product.getProductQuantity(),productQuantity);
+
+        productIterator = productRepository.findAll();
+        Product updatedProduct = productIterator.next();
+        assertEquals(product.getProductId(),updatedProduct.getProductId());
+        assertEquals(product.getProductName(),updatedProduct.getProductName());
+        assertEquals(product.getProductQuantity(),updatedProduct.getProductQuantity());
+    }
 }
