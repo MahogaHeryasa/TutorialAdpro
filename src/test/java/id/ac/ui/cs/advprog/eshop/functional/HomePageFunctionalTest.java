@@ -14,7 +14,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@ExtendWith((SeleniumJupiter.class))
+@ExtendWith(SeleniumJupiter.class)
 public class HomePageFunctionalTest {
 
     @LocalServerPort
