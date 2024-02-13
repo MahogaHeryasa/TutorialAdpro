@@ -53,11 +53,11 @@ jobs:
           java-version: "21"
           cache: "gradle"
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
       - name: Set gradlew as executable
         run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
 
       - name: Analyze with SonarCloud
 
