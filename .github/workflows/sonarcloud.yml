@@ -68,7 +68,7 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=MahogaHeryasa_TutorialAdpro
-            -Dsonar.organization=MahogaHeryasa
+            -Dsonar.organization=mahogaheryasa
             -Dsonar.java.binaries=.
             -Dsonar.sources=src/main/java
             -Dsonar.tests=src/test/java
