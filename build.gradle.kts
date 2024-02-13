@@ -3,6 +3,8 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.2.2"
     id("io.spring.dependency-management") version "1.1.4"
+    id("jacoco")
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -74,4 +76,15 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    reports {
+        xml.required = true
+    }
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "MahogaHeryasa_TutorialAdpro")
+        property("sonar.organization", "mahogaheryasa")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
