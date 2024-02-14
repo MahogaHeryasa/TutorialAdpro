@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductControllerTest {
+class ProductControllerTest {
     @InjectMocks
     private ProductController productController;
 
@@ -30,7 +30,7 @@ public class ProductControllerTest {
     @Test
     void testCreateProductPage() {
         String viewName = productController.createProductPage(model);
-        assertEquals("createProduct", viewName);
+        assertEquals("CreateProduct", viewName);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ProductControllerTest {
     void  testProductListPage() {
         when(productService.findAll()).thenReturn(null);
         String viewName = productController.productListPage(model);
-        assertEquals("productList", viewName);
+        assertEquals("ProductList", viewName);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ProductControllerTest {
         when(productService.findById(productId)).thenReturn(product);
 
         String viewName = productController.editProductPage(productId, model);
-        assertEquals("editProduct", viewName);
+        assertEquals("EditProduct", viewName);
     }
 
     @Test
