@@ -87,10 +87,14 @@ class ProductServiceImplementationTest {
         String updatedProductName = "Kecap Cap Capung";
         int updatedProductQuantity = 120;
 
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId(existingProduct.getProductId());
+        updatedProduct.setProductName("Kecap Cap Capung");
+        updatedProduct.setProductQuantity(120);
 
-        productService.update(existingProduct, updatedProductName, updatedProductQuantity);
+        productService.update(updatedProduct.getProductId(), updatedProduct);
 
-        verify(productRepository, times(1)).update(existingProduct, updatedProductName, updatedProductQuantity);
+        verify(productRepository, times(1)).update(updatedProduct.getProductId(), updatedProduct);
     }
 
     @Test
