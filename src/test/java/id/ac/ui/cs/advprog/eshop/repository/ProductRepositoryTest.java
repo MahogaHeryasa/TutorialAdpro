@@ -131,7 +131,7 @@ class ProductRepositoryTest {
         updatedProduct.setProductName("Kecap Cap Bagas");
         updatedProduct.setProductQuantity(120);
         Product editedProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
-        productRepository.update(editedProduct, "Kecap Cap Bagas", 120);
+        productRepository.update(updatedProduct.getProductId(), updatedProduct);
 
         assertNotEquals(editedProduct.getProductName(),productName);
         assertNotEquals(editedProduct.getProductQuantity(),productQuantity);

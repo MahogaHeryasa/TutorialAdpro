@@ -76,10 +76,9 @@ class ProductControllerTest {
         product.setProductId(productId);
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
+        productService.create(product);
 
-        when(productService.findById(productId)).thenReturn(product);
-
-        String redirectURL = productController.editProduct(productId, "Sampo Cap Bambi", 120);
+        String redirectURL = productController.editProduct(product, model);
         assertEquals("redirect:/product/list", redirectURL);
     }
 }
