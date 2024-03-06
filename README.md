@@ -143,3 +143,17 @@ Saya menerapkan prinsip Dependency Inversions Principle (DIP) dengan mengubah pe
 
 - Ketergantungan yang Tinggi Antar Komponen, tidak menerapkan prinsip DIP dapat menyebabkan kelas-kelas bergantung langsung pada implementasi *concrete class*, bukan pada *abstraction*. Hal ini menyulitkan perubahan dan tahap testing, karena perubahan pada *low-level modules* berdampak pada *high-level modules*. (Contoh: tanpa penerapan DIP, perubahan pada `CarController` berdampak pada perubahan `CarServiceImpl` juga, sehingga menyulitkan *testing* dan *mantainability*).
 </details>
+
+<details>
+<summary><b><h2>Tutorial 4</h2></b></summary>
+
+# Refleksi
+
+### Refleksi TTD
+
+Menurut saya, TTD *flow* cukup berguna untuk diaplikasikan. Walaupun, pada awalnya cukup sulit untuk mengimplementasikan TTD karena harus bekerja berdasarkan *tests* yang telah dibuat, TTD menjaga kode yang saya buat untuk mencapai *correctness*, *maintainability*, dan *productive workflow*. Kedepannya, dalam membuat tes saya harus bisa memahami kebutuhan aplikasi yang membuat test yang meng-*cover* kode saya secara menyeluruh.
+
+### Implementasi F.I.R.S.T
+
+Dengan mempertimbangkan prinsip F.I.R.S.T. (Fast, Isolated/Independent, Repeatable, Self-validating, and Timely), *testing* yang telah dibuat sebagian besar mengikuti prinsip-prinsip tersebut. Mereka berjalan cukup cepat, independen, dapat diulang, dan memvalidasi diri, hanya saja masih terdapat beberapa kode yang belum mendapatkan *code coverage* sepenuhnya. Kedepannya saya akan memastikan tes yang saya buat menerapakan seluruh prinsip F.I.R.S.T 
+</details>
