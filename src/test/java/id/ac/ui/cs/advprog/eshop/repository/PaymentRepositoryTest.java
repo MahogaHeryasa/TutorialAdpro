@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,12 @@ public class PaymentRepositoryTest {
         payments = new ArrayList<>();
         Map<String, String> paymentData1 = new HashMap<>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucher", paymentData1
+        Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.VOUCHER.getValue(), paymentData1
                 , PaymentStatus.SUCCESS.getValue());
         Map<String, String> paymentData2 = new HashMap<>();
         paymentData2.put("bankName", "BCA");
         paymentData2.put("referenceCode", "12A127DJAK");
-        Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d89c", "bank", paymentData2
+        Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d89c", PaymentMethod.BANK.getValue(), paymentData2
                 , PaymentStatus.SUCCESS.getValue());
         payments.add(payment1); payments.add(payment2);
     }
@@ -50,7 +51,7 @@ public class PaymentRepositoryTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", "BCA");
         paymentData.put("referenceCode", "12A127DJAK");
-        Payment newPayment = new Payment("13652556-012a-4c07-b546-54eb1396d89c", "bank", paymentData
+        Payment newPayment = new Payment("13652556-012a-4c07-b546-54eb1396d89c", PaymentMethod.BANK.getValue(), paymentData
                 , PaymentStatus.SUCCESS.getValue());
         Payment result = paymentRepository.save(newPayment);
 

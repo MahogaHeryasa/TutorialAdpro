@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
@@ -55,13 +56,13 @@ class PaymentServiceTest {
 
         Map<String, String> paymentData1 = new HashMap<>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucher", paymentData1, "SUCCESS");
+        Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.VOUCHER.getValue(), paymentData1, "SUCCESS");
         payments.add(payment1);
 
         Map<String, String> paymentData2 = new HashMap<>();
         paymentData2.put("bankName", "BCA");
         paymentData2.put("referenceCode", "12A127DJAK");
-        Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "bank", paymentData2, "SUCCESS");
+        Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.BANK.getValue(), paymentData2, "SUCCESS");
         payments.add(payment2);
     }
 
@@ -73,7 +74,7 @@ class PaymentServiceTest {
 
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
-        Payment result = paymentService.addPayment(order, "voucher", paymentData);
+        Payment result = paymentService.addPayment(order, PaymentMethod.VOUCHER.getValue(), paymentData);
         verify(paymentRepository, times(1)).save(any(Payment.class));
         assertEquals(payment.getId(), result.getId());
     }
